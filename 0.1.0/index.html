@@ -59,69 +59,109 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class"><a href="classes/addressmapping.html" class="tsd-kind-icon">Address<wbr>Mapping</a></li>
-								<li class="tsd-kind-class"><a href="classes/cruxclient.html" class="tsd-kind-icon">Crux<wbr>Client</a></li>
-								<li class="tsd-kind-class"><a href="classes/payidclaim.html" class="tsd-kind-icon">PayIDClaim</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface"><a href="interfaces/iaddress.html" class="tsd-kind-icon">IAddress</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/iaddressmapping.html" class="tsd-kind-icon">IAddress<wbr>Mapping</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/icruxidstate.html" class="tsd-kind-icon">ICruxIDState</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/icruxpaypeeroptions.html" class="tsd-kind-icon">ICrux<wbr>Pay<wbr>Peer<wbr>Options</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/iputaddressmapfailures.html" class="tsd-kind-icon">IPut<wbr>Address<wbr>Map<wbr>Failures</a></li>
-								<li class="tsd-kind-interface"><a href="interfaces/iputaddressmapsuccess.html" class="tsd-kind-icon">IPut<wbr>Address<wbr>Map<wbr>Success</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function"><a href="globals.html#getlogger" class="tsd-kind-icon">get<wbr>Logger</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function">
-					<a name="getlogger" class="tsd-anchor"></a>
-					<h3>get<wbr>Logger</h3>
-					<ul class="tsd-signatures tsd-kind-function">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Logger<span class="tsd-signature-symbol">(</span>filename<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ILogger</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/SanchayPahalwani/js-sdk/blob/5f25037/src/index.ts#L9">index.ts:9</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>filename: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ILogger</span></h4>
-						</li>
-					</ul>
-				</section>
-			</section>
+			<div class="tsd-panel tsd-typography">
+				<a href="#what-is-cruxpay" id="what-is-cruxpay" style="color: inherit; text-decoration: none;">
+					<h3>What is CruxPay?</h3>
+				</a>
+				<p><a href="https://cruxpay.com/">CruxPay</a> is a protocol which aims to link any blockchain address to a human-readable name, and let users interact with each other and dApps with ease.</p>
+				<a href="#adding-cruxpay-sdkjs" id="adding-cruxpay-sdkjs" style="color: inherit; text-decoration: none;">
+					<h3>Adding cruxpay-sdk.js</h3>
+				</a>
+				<p>First you need to get cruxpay sdk into your project. This can be done using the following methods:</p>
+				<ul>
+					<li>npm: <code>npm install @cruxpay/js-sdk</code></li>
+					<li>pure js: link the <a href="https://unpkg.com/@cruxpay/js-sdk/dist/cruxpay-sdk-dom.js">cruxpay-sdk-dom.js</a></li>
+				</ul>
+				<a href="#sdk-initialisation" id="sdk-initialisation" style="color: inherit; text-decoration: none;">
+					<h3>SDK Initialisation:</h3>
+				</a>
+				<p>To initialize the sdk, you need to minimally pass a javascript object with following details:-</p>
+				<ol>
+					<li><strong>getEncryptionKey</strong><ul>
+							<li>function reference that return a <strong>constant string</strong> which will be used to encrypt all data that is stored in localStorage. </li>
+							<li>This should change for each user, so we recommend it is related to user’s password like a sha256 hash of it. </li>
+							<li>For example check <code>getPassHashedEncryptionKey</code> function in code example below.</li>
+						</ul>
+					</li>
+					<li><strong>walletClientName</strong><ul>
+							<li>walletClientName is the key which identifies the wallet specific configurations stored in gaiaHub like <ol>
+									<li>Subdomain Registrar Information</li>
+									<li>BNS(BlockStack Name Service) Node</li>
+									<li>Currency symbol map of your wallet</li>
+								</ol>
+							</li>
+							<li>To help you get started, you can use <code>cruxdev</code> as the value which is already configured for our dev test users. It has 5 pre-registered crypto symbols for a fast start. You can contact us at <a href="https://t.me/cruxpay_integration">telegram</a> channel for registration of your own walletClientName.</li>
+						</ul>
+					</li>
+					<li><strong>privateKey (optional)</strong><ul>
+							<li>Required to re-initialise the CruxClient with same user across different devices.</li>
+							<li>For clients using HD derivation paths, recommended to use the path (<code>m/889&#39;/0/0&#39;</code>) for CruxPay keypair node derivation with respect to account indices.</li>
+						</ul>
+					</li>
+				</ol>
+				<p><code>**Note:** Cruxprotocol JS SDK is case insensetive for cryptocurrency symbols and will always output lowercase symbols.</code></p>
+				<p>Example below shows how to a cruxClient instance. Note that all <a href="#sdk-operation">SDK Operation</a> can oly be run after <code>.init()</code> is called.   </p>
+				<pre><code class="language-javascript"><span class="hljs-keyword">import</span> crypto <span class="hljs-keyword">from</span> <span class="hljs-string">"crypto"</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getPassHashedEncryptionKey</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> user_password = getUserPassword();  <span class="hljs-comment">// to be implemented by wallet</span>
+    <span class="hljs-keyword">return</span> crypto.createHash(<span class="hljs-string">'sha256'</span>).update(user_password).digest();
+}
+
+<span class="hljs-keyword">let</span> cruxClientOptions = {
+    <span class="hljs-attr">getEncryptionKey</span>: getPassHashedEncryptionKey,     
+    <span class="hljs-attr">walletClientName</span>: <span class="hljs-string">'cruxdev'</span>,
+    <span class="hljs-attr">privateKey</span>: <span class="hljs-string">"6bd397dc89272e71165a0e7d197b280c7a88ed5b1e44e1928c25455506f1968f"</span>  <span class="hljs-comment">// (optional parameter)</span>
+}
+
+<span class="hljs-keyword">let</span> cruxClient = <span class="hljs-keyword">new</span> CruxClient(cruxClientOptions);
+cruxClient.init()
+.then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'CruxClient initialized'</span>);
+}).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'CruxClient error'</span>, err);
+})</code></pre>
+				<p>That&#39;s it! now you can use the cruxClient object to perform operations defined in <a href="#sdk-operation">SDK Operation</a>.</p>
+				<pre><code class="language-javascript">cruxClient.getCruxIDState().then(<span class="hljs-function">(<span class="hljs-params">cruxIDState</span>) =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(cruxIDState);
+})</code></pre>
+				<p>Find references to all available methods of <a href="classes/cruxclient.html">CruxClient</a>.</p>
+				<p>Wallet clients are encouraged to surface the respective <code>ERROR_CODE</code> of the <code>CruxClientError</code> to their Users with any custom error messages. This will help in debugging any issues with the functionality.</p>
+				<p>Refer <a href="https://github.com/cruxprotocol/js-sdk/blob/master/error-handling.md">error-handling.md</a> for more information on Error handling.</p>
+				<a href="#building" id="building" style="color: inherit; text-decoration: none;">
+					<h3>Building</h3>
+				</a>
+				<a href="#requirements" id="requirements" style="color: inherit; text-decoration: none;">
+					<h4>Requirements</h4>
+				</a>
+				<ul>
+					<li><a href="https://nodejs.org">Node.js</a></li>
+					<li>npm</li>
+				</ul>
+				<a href="#building-from-source" id="building-from-source" style="color: inherit; text-decoration: none;">
+					<h4>Building From Source</h4>
+				</a>
+				<pre><code class="language-bash">npm run-script build</code></pre>
+				<p>Build the cruxpay-sdk.js package and put all the browser build files into the <code>dist</code> folder.</p>
+				<a href="#testing-mocha" id="testing-mocha" style="color: inherit; text-decoration: none;">
+					<h4>Testing (mocha)</h4>
+				</a>
+				<pre><code class="language-bash">npm run-script <span class="hljs-built_in">test</span></code></pre>
+				<a href="#sample-wallet-integration" id="sample-wallet-integration" style="color: inherit; text-decoration: none;">
+					<h3>Sample Wallet Integration</h3>
+				</a>
+				<pre><code class="language-bash">npm run-script wallet_demo</code></pre>
+				<p>Running the above command will build a <a href="https://localhost:1234">demo page</a>, here you can play around with all method that are exposed by the sdk.</p>
+				<a href="#how-can-i-contribute" id="how-can-i-contribute" style="color: inherit; text-decoration: none;">
+					<h3>How can I contribute?</h3>
+				</a>
+				<p>See <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> file.</p>
+			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals current ">
+					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
